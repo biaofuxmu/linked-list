@@ -79,9 +79,8 @@ Node* list_delete(Node* list, int index)
     {
         Node* tmp = list;
         list = tmp->next;
-        tmp->next = NULL;
-        tmp = NULL;
         free(tmp);
+        tmp = NULL;
     }
     else
     {
@@ -93,9 +92,8 @@ Node* list_delete(Node* list, int index)
         Node* tmp = node->next;
 
         node->next = tmp->next;
-        tmp->next = NULL;
-        tmp = NULL;
         free(tmp);
+        tmp = NULL;
     }
     return list;
 }
