@@ -1,5 +1,5 @@
-#ifndef SINGLE_LIST_H
-#define SINGLE_LIST_H
+#ifndef __SINGLE_LIST_H__
+#define __SINGLE_LIST_H__
 
 #include <stdio.h>
 #include <malloc.h>
@@ -41,4 +41,4 @@ bool modify_index(Node* list,int index, int data);
 //修改指定数据的值
 bool modify_data(Node* list, int data, int val);
 
-#endif//SINGLE_LIST_H
+#endif//__SINGLE_LIST_H__
