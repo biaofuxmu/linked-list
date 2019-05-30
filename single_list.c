@@ -3,7 +3,7 @@
 //创建结点
 Node* create_node(int data)
 {
-    Node* node = malloc(sizeof(Node));
+    Node* node = (Node*)malloc(sizeof(Node));
     node->data = data;
     node->next = NULL;
 }
@@ -48,7 +48,7 @@ size_t list_len(Node* list)
 //在链表指定位置插入一个结点
 Node* list_insert(Node* list, int index, int data)
 {
-    if(index > list_len(list))
+    if(index > list_len(list) || index < 0)
         return NULL;
     else if(index == 0)
     {
@@ -73,7 +73,7 @@ Node* list_insert(Node* list, int index, int data)
 //删除指定位置的一个结点
 Node* list_delete(Node* list, int index)
 {
-    if(list == NULL || index > list_len(list))
+    if(list == NULL || index > list_len(list) || index < 0)
         return NULL;
     else if(index == 0)
     {
@@ -116,7 +116,8 @@ Node* list_find(Node* list,int data)
 //修改指定位置的结点值
 bool modify_index(Node* list,int index, int data)
 {
-
+    if(index < 0)
+        return false;
     Node* node = list;
     for (int i = 0; i < index; ++i)
     {
