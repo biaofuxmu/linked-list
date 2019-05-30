@@ -3,7 +3,7 @@
 //创建结点
 Node* create_node(data)
 {
-    Node* node = malloc(sizeof(struct Node));
+    Node* node = (Node*)malloc(sizeof(Node));
     node->data = data;
     node->prev = NULL;
     node->next = NULL;
@@ -25,8 +25,8 @@ void free_list(DoubleList* list)
     {
         Node* tmp = list->head;
         list->head = list->head->next;
-        tmp = NULL;
         free(tmp);
+        tmp = NULL;
         list->size--;
     }
 }
@@ -48,7 +48,7 @@ void show_list(DoubleList* list)
     }
 }
 
-//插入一个头结点, 返回头结点
+//插入一个头结点
 void push_head(DoubleList* list, int data)
 {
     Node* new_node = create_node(data);
@@ -67,7 +67,7 @@ void push_head(DoubleList* list, int data)
     list->size++;
 }
 
-//插入一个尾结点, 返回头结点
+//插入一个尾结点
 void push_tail(DoubleList* list, int data)
 {
     Node* new_node = create_node(data);
@@ -86,7 +86,7 @@ void push_tail(DoubleList* list, int data)
     
 }
 
-//任意位置插入一个结点, 返回头结点
+//任意位置插入一个结点
 bool insert_node(DoubleList* list, int index, int data)
 { 
     if(index <0 || index > list->size)
@@ -130,7 +130,7 @@ bool insert_node(DoubleList* list, int index, int data)
     return true;
 }
 
-//删除头结点, 返回头结点
+//删除头结点
 void del_head(DoubleList* list)
 {
     if(list->size == 0)
@@ -143,7 +143,7 @@ void del_head(DoubleList* list)
     }
 
     Node* tmp = list->head;
-    list->head = list->head->next;
+    list->head = tmp->next;
     list->head->prev = NULL;
 
     free(tmp);
@@ -151,7 +151,7 @@ void del_head(DoubleList* list)
     list->size--;
 }
 
-//删除尾结点, 返回头结点
+//删除尾结点
 void del_tail(DoubleList* list)
 {
     if(list->size == 0)
@@ -164,7 +164,7 @@ void del_tail(DoubleList* list)
     }
 
     Node* tmp = list->tail;
-    list->tail = list->tail->prev;
+    list->tail = tmp->prev;
     list->tail->next = NULL;
 
     free(tmp);
@@ -172,11 +172,11 @@ void del_tail(DoubleList* list)
     list->size--;
 }
 
-//删除任意位置结点, 返回头结点
+//删除任意位置结点
 bool del_node(DoubleList* list, int index)
 {
     if(index < 0 || index > list->size)
-        return;
+        return true;
     if(index == 0)
     {
         del_head(list);
@@ -211,6 +211,7 @@ bool del_node(DoubleList* list, int index)
     free(tmp);
     tmp = NULL;
     list->size--;
+    return true;
 }
 
 //获取头结点
@@ -228,23 +229,63 @@ Node* get_tail(DoubleList* list)
 //获取任意位置结点
 Node* get_node(DoubleList* list, int index)
 {
-    
+    if(index < 0 || index > list->size)
+        return NULL;
+    Node* node = NULL;
+    if(index < list->size / 2)
+    {
+        node = list->head;
+        for(int i =0; i < index ; i++)
+        {
+            node = node->next;
+        }
+    }
+    else
+    {
+        node = list->tail;
+        for (int i = 0; i < list->size - index - 1; ++i)
+        {
+            node = node->prev;
+        }
+    }
+    return node; 
 }
 
 //查找结点
 Node* find_data(DoubleList* list, int data)
 {
-    
+    if(list->size == 0)
+        return NULL;
+    Node* node = list->head;
+    while(node)
+    {
+        if(node->data == data)
+            return node;
+        node = node->next;
+    }
+    return NULL;
 }
 
 //修改任意结点的值
-void modify_node(DoubleList* list, int index, int data)
+bool modify_node(DoubleList* list, int index, int data)
 {
-    
+    Node* node = get_node(list,index);
+    if(node)
+    {
+        node->data = data;
+        return true;
+    }
+    return false;
 }
 
 //更新结点的值
-void modify_data(DoubleList* list, int data)
+bool modify_data(DoubleList* list, int data, int val)
 {
-    
+    Node* node = find_data(list,data);
+    if(node)
+    {
+        node->data = val;
+        return true;    
+    }
+    return false;
 }
