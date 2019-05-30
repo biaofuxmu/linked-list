@@ -52,8 +52,8 @@ Node* get_node(DoubleList* list, int index);
 //查找结点
 Node* find_data(DoubleList* list, int data);
 //修改任意结点的值
-void modify_node(DoubleList* list, int index, int data);
+bool modify_node(DoubleList* list, int index, int data);
 //更新结点的值
-void modify_data(DoubleList* list, int data);
+bool modify_data(DoubleList* list, int data, int val);
 
 #endif//__DOUBLE_LIST_H__
