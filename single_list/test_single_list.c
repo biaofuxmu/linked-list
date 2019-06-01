@@ -1,20 +1,6 @@
 #include "single_list.h"
 //测试单链表的各个函数
 
-//创建长度为num的测试链表
-Node* create_list(int num)
-{
-    Node* head = create_node(1);
-    Node* tmp = head;
-    for (int i = 2; i <= num; ++i)
-    {
-        Node* list = create_node(i);
-        tmp->next = list;
-        tmp = list;
-    }
-    return head;
-}
-
 void test_create_list()
 {
     Node* head = create_list(10);
