@@ -46,7 +46,7 @@ size_t list_len(Node* head)
 }
 
 
-//在链表指定位置插入一个结点 返回头结点
+//在链表指定位置插入结点 返回头结点
 Node* list_insert(Node* head, int index, int data)
 {
     //判断链表是否为空以及插入的位置是否超出链表的范围
@@ -73,7 +73,7 @@ Node* list_insert(Node* head, int index, int data)
     return head;
 }
 
-//删除指定位置的一个结点 返回头结点
+//删除链表指定位置的结点 返回头结点
 Node* list_delete(Node* head, int index)
 {
     if(head == NULL || index >= list_len(head) || index < 0)
