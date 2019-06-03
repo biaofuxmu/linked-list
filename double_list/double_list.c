@@ -1,7 +1,7 @@
 #include "double_list.h"
 
 //创建结点
-Node* create_node(data)
+Node* create_node(int data)
 {
     Node* node = (Node*)malloc(sizeof(Node));
     node->data = data;
@@ -37,15 +37,28 @@ size_t get_size(DoubleList* list)
     return list->size;
 }
 
+//获取头结点
+Node* get_head(DoubleList* list)
+{
+    return list->head;
+}
+
+//获取尾结点
+Node* get_tail(DoubleList* list)
+{
+    return list->tail;
+}
+
 //遍历链表
 void show_list(DoubleList* list)
 {
     Node* node = list->head;
     for (int i = 0; i < list->size; ++i)
     {
-        printf("%d\n", node->data);
+        printf("%d ", node->data);
         node = node->next;
     }
+    printf("\n");
 }
 
 //插入一个头结点
@@ -122,9 +135,9 @@ bool insert_node(DoubleList* list, int index, int data)
 
     Node* new_node = create_node(data);
 
-    tmp->net->prev = new_node;
+    tmp->next->prev = new_node;
     new_node->next = tmp->next;
-    tmp->nex = new_node;
+    tmp->next = new_node;
     new_node->prev = tmp;
     list->size++;
     return true;
@@ -138,7 +151,7 @@ void del_head(DoubleList* list)
     if(list->size == 1)
     {
         free(list->head);
-        init_list(&list);
+        init_list(list);
         return;
     }
 
@@ -159,7 +172,7 @@ void del_tail(DoubleList* list)
     if(list->size == 1)
     {
         free(list->tail);
-        init_list(&list);
+        init_list(list);
         return;
     }
 
@@ -214,17 +227,6 @@ bool del_node(DoubleList* list, int index)
     return true;
 }
 
-//获取头结点
-Node* get_head(DoubleList* list)
-{
-    return list->head;
-}
-
-//获取尾结点
-Node* get_tail(DoubleList* list)
-{
-    return list->tail;
-}
 
 //获取任意位置结点
 Node* get_node(DoubleList* list, int index)
@@ -251,7 +253,7 @@ Node* get_node(DoubleList* list, int index)
     return node; 
 }
 
-//查找结点
+//查找链表中指定的数据
 Node* find_data(DoubleList* list, int data)
 {
     if(list->size == 0)
@@ -266,7 +268,7 @@ Node* find_data(DoubleList* list, int data)
     return NULL;
 }
 
-//修改任意结点的值
+//修改链表中指定结点的值
 bool modify_node(DoubleList* list, int index, int data)
 {
     Node* node = get_node(list,index);
@@ -278,7 +280,7 @@ bool modify_node(DoubleList* list, int index, int data)
     return false;
 }
 
-//更新结点的值
+//修改链表中指定数据的值
 bool modify_data(DoubleList* list, int data, int val)
 {
     Node* node = find_data(list,data);
