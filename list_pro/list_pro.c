@@ -1,5 +1,17 @@
 #include "list_pro.h"
 
+//获取链表长度
+size_t list_len(Node* head)
+{
+    int len = 0;
+    while(head)
+    {
+        head = head->next;
+        len++;
+    }
+    return len;
+}
+
 //链表反转
 Node* list_reverse(Node* list)
 {
@@ -74,9 +86,9 @@ Node* cycle_entry(Node* list)
 }
 
 //查找公共结点
-Node* list_public(Node* list1,Node* list2)
+Node* list_public_1(Node* list1,Node* list2)
 {
-    if(lis1 == NULL || list2 == NULL)
+    if(list1 == NULL || list2 == NULL)
         return NULL;
     int len1 = list_len(list1);
     int len2 = list_len(list2);
@@ -112,7 +124,7 @@ Node* list_public(Node* list1,Node* list2)
 //查找公共结点
 Node* list_public(Node* list1,Node* list2)
 {
-    if(lis1 == NULL || list2 == NULL)
+    if(list1 == NULL || list2 == NULL)
         return NULL;
     int len1 = list_len(list1);
     int len2 = list_len(list2);
@@ -144,7 +156,7 @@ Node* merge_two_list(Node* list1, Node* list2)
         return list1;
     if(list1->data < list2->data)
     {
-        lsit1->next=merge_two_list(list1->next,list2);
+        list1->next=merge_two_list(list1->next,list2);
         return list1;
     }
     else
