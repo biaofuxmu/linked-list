@@ -6,6 +6,7 @@ Node* create_node(int data)
     Node* node = (Node*)malloc(sizeof(Node));//申请内存
     node->data = data;
     node->next = NULL;
+    return node;
 }
 
 //创建长度为num的链表
@@ -51,7 +52,7 @@ Node* list_insert(Node* head, int index, int data)
 {
     //判断链表是否为空以及插入的位置是否超出链表的范围
     if(head == NULL || index > list_len(head) || index < 0)
-        return NULL;
+        return head;
     //插入0位置，即插入一个头结点
     else if(index == 0)
     {
@@ -77,7 +78,7 @@ Node* list_insert(Node* head, int index, int data)
 Node* list_delete(Node* head, int index)
 {
     if(head == NULL || index >= list_len(head) || index < 0)
-        return NULL;
+        return head;
     //判断链表是否为空以及插入的位置是否超出链表的范围
     else if(index == 0)
     {
