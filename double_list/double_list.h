@@ -18,12 +18,12 @@ typedef struct Node
 //双向链表结构体
 typedef struct DoubleList
 {
-    Node* head;
-    Node* tail;
-    size_t size;
+    Node* head;     //头结点
+    Node* tail;     //尾结点
+    size_t size;    //链表长度
 }DoubleList;
 
-//创建结点
+//创建双向链表结点
 Node* create_node(int data);
 //初始化链表
 void init_list(DoubleList* list);
@@ -52,11 +52,11 @@ bool del_node(DoubleList* list, int index);
 
 //获取任意位置结点
 Node* get_node(DoubleList* list, int index);
-//查找链表中指定的数据
+//获取链表中指定数据所在的第一个结点
 Node* find_data(DoubleList* list, int data);
 //修改链表中指定结点的值
 bool modify_node(DoubleList* list, int index, int data);
-//修改链表中指定数据的值
+//修改链表中指定的第一个数据
 bool modify_data(DoubleList* list, int data, int val);
 
 #endif//__DOUBLE_LIST_H__
