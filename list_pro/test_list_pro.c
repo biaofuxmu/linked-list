@@ -7,6 +7,7 @@ Node* create_node(int data)
     Node* node = (Node*)malloc(sizeof(Node));//申请内存
     node->data = data;
     node->next = NULL;
+    return node;
 }
 
 //创建长度为num的链表
