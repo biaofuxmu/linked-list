@@ -13,6 +13,7 @@ size_t list_len(Node* head)
 }
 
 //链表反转
+//
 Node* list_reverse(Node* head)
 {
     if(head == NULL || head->next == NULL)
@@ -37,8 +38,7 @@ Node* list_reverse(Node* head)
 }
 
 //判断链表是否有环
-//思路：先判断链表的长度是否>1
-//定义两个指针，一个指向头结点slow，一个指向头结点的下一个结点fast，然后slow每次走一步，fast每次走两步，如果有环，则它们将会相遇
+//思路：定义两个指针slow和fast，初始时都指向头结点，然后slow每次走一步，fast每次走两步，如果他们能够相遇在同一结点，则链表有环
 bool has_cycle(Node* head)
 {
     if(head == NULL || head->next==NULL)
