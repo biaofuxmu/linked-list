@@ -56,6 +56,15 @@ bool has_cycle(Node* head)
 }
 
 //查找环形入口
+//思路：使用两个指针先判断是否有环
+//设头结点到环形入口的距离为a，环形入口到两个指针相遇结点的距离为b，环的长度为c
+//设两指针相遇时，慢指针走的路程为s，则快指针走的路程为2s
+//那么有s = a+b+m*c，2s = a+b+n*c
+//2(a+b+m*c)=a+b+n*c -> a=(n-2*m)c-b
+//再次化解得a=(n-2m-1)c + (c-b)
+//由上述公式我们可以的得出
+//如果让一个指针从头结点出发，一个指针从他们上次相遇结点出发，速度一样致，
+//那么他们再次相遇的地方就是环形链表的入口
 Node* cycle_entry(Node* head)
 {
     if(head == NULL || head->next==NULL)
@@ -82,42 +91,6 @@ Node* cycle_entry(Node* head)
             fast = fast->next;
         }
         return slow;
-    }
-    return NULL;
-}
-
-//查找公共结点
-Node* list_public_1(Node* head1,Node* head2)
-{
-    if(head1 == NULL || head2 == NULL)
-        return NULL;
-    int len1 = list_len(head1);
-    int len2 = list_len(head2);
-    int length = 0;
-    Node* long_list = NULL;
-    Node* short_list = NULL;
-    if(len1 > len2)
-    {
-        long_list = head1;
-        short_list = head2;
-        length = len1 - len2;
-    }
-    else
-    {
-        long_list = head2;
-        short_list = head1;
-        length = len2 - len1;
-    }
-    for(int i = 0;i < length; i++)
-    {
-        long_list = long_list->next;
-    }
-    while(short_list && long_list)
-    {
-        if(short_list == long_list)
-            return short_list;
-        short_list = short_list->next;
-        long_list = long_list->next;
     }
     return NULL;
 }
