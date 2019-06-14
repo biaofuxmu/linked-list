@@ -227,6 +227,14 @@ Node* find_middle(Node* head)
 
 //删除有序链表重复结点
 //删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。
+//删除重复的结点，需要判断结点中的数据是否相等，显然需要两个结点，一个指向当前结点cur，一个指向后面的结点sec，然后判断结点上的数据是否相等
+//还要考虑重复的数据从头结点开始，如果删了，新的头结点在哪，所以要一个指针备份头结点head_tmp，一个指针pre指向当前结点cur的上一个结点，所以这里需要四个指针
+//1.先判断链表是否为空或者是否只含一个结点
+//2.定义四个指针head_tmp备份头结点，pre为NULL，cur指向头结点，sec指向头结点的下一个结点
+//3.如果cur->data等于sec->data,让sec往后移，直到两个指针指向结点的数据不相等，然后将cur,sec之间的结点都删掉,并将cur指向sec指向的结点。
+//  如果第一次即cur指向头结点的时候就执行了这个操作那么pre就是NULL，所以我们需要将head_tmp指向新的头结点cur,否则就将pre->next=cur。
+//  但是还没完，先看下pre,cur,sec三个结点的指向，pre->next=cur,cur和sec指向了同一个结点，和最开始的状态不一样，所以要将sec的指向往后移一个结点
+//4如果cur->data不等于sec->data，将pre,cur,sec指针都往后移一个结点
 Node* del_repeat(Node* head)
 {
     if(head == NULL || head->next==NULL)
