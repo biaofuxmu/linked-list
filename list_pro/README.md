@@ -14,5 +14,5 @@ examination questions of linked list
 - 查找公共结点
 - 合并两个有序链表
 - 查找倒数第K个结点
-- 删除重复结点
 - 查找中间结点
+- 删除有序链表重复结点
